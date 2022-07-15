@@ -48,8 +48,24 @@ public class AccountTest {
       account.deposit(-100.0);
     } catch (IllegalArgumentException e) {
       String exceptionMsg = e.getMessage();
-      System.out.println(exceptionMsg);
       org.assertj.core.api.Assertions.assertThat(exceptionMsg).isEqualTo("Can not deposit negative amount");
     }
+  }
+
+  @Test
+  public void canIWithdrawMoneyFromAccountsIfAlreadyZero() {
+    // 2. I can Withdraw money from accounts already zero
+    Account account = new Account();
+    try {
+      account.withdraw(100.0);
+    } catch (IllegalArgumentException e) {
+      String exceptionMsg = e.getMessage();
+      org.assertj.core.api.Assertions.assertThat(exceptionMsg).isEqualTo("Can not withdraw amount balance is less than amount requested");
+    }
+  }
+
+  @Test
+  public void canIWithdrawMoneyFromAccounts() {
+    // 2. I can Withdraw money from accounts
   }
 }

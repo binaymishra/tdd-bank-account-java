@@ -18,4 +18,12 @@ public class Account {
     }
     this.balance += amount;
   }
+
+  public void withdraw(double amount) {
+    if(getBalance() < amount) {
+      throw new IllegalArgumentException("Can not withdraw amount balance is less than amount requested");
+    } else {
+      this.balance -= amount;
+    }
+  }
 }
