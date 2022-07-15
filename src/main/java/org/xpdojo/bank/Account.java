@@ -12,4 +12,10 @@ public class Account {
     return balance;
   }
 
+  public void deposit(double amount) {
+    if(amount < 0.0) {
+      throw new IllegalArgumentException("Can not deposit negative amount");
+    }
+    this.balance += amount;
+  }
 }
