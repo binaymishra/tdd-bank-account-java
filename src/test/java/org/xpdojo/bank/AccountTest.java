@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-
 public class AccountTest {
 
   @Test
@@ -48,7 +47,8 @@ public class AccountTest {
       account.deposit(-100.0);
     } catch (IllegalArgumentException e) {
       String exceptionMsg = e.getMessage();
-      org.assertj.core.api.Assertions.assertThat(exceptionMsg).isEqualTo("Can not deposit negative amount");
+      org.assertj.core.api.Assertions.assertThat(exceptionMsg)
+          .isEqualTo("Can not deposit negative amount");
     }
   }
 
@@ -60,12 +60,27 @@ public class AccountTest {
       account.withdraw(100.0);
     } catch (IllegalArgumentException e) {
       String exceptionMsg = e.getMessage();
-      org.assertj.core.api.Assertions.assertThat(exceptionMsg).isEqualTo("Can not withdraw amount balance is less than amount requested");
+      org.assertj.core.api.Assertions.assertThat(exceptionMsg).isEqualTo("Can not withdraw amount");
     }
   }
 
   @Test
   public void canIWithdrawMoneyFromAccounts() {
     // 2. I can Withdraw money from accounts
+    Account account = new Account(100); // Balance is 100
+    account.withdraw(100.0); // Withdraw 100.0
+    Assertions.assertEquals(0.0, account.getBalance()); // balance becomes zero
+  }
+
+  @Test
+  public void canIWithdrawMoreMoneyThanBalanceFromAccounts() {
+    // 2. I can Withdraw money from accounts
+    Account account = new Account(100); // Balance is 100
+    try {
+      account.withdraw(200.0);
+    } catch (IllegalArgumentException e) {
+      String exceptionMsg = e.getMessage();
+      org.assertj.core.api.Assertions.assertThat(exceptionMsg).isEqualTo("Can not withdraw amount");
+    }
   }
 }

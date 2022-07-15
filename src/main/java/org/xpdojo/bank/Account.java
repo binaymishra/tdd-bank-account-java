@@ -4,6 +4,10 @@ public class Account {
 
   private double balance;
 
+  public Account(double balance) {
+    this.balance = balance;
+  }
+
   public Account() {
     this.balance = 0.0;
   }
@@ -21,7 +25,7 @@ public class Account {
 
   public void withdraw(double amount) {
     if(getBalance() < amount) {
-      throw new IllegalArgumentException("Can not withdraw amount balance is less than amount requested");
+      throw new IllegalArgumentException("Can not withdraw amount");
     } else {
       this.balance -= amount;
     }
